@@ -81,6 +81,7 @@ function App() {
         onOpenChange={setModalOpen}
         cardToEdit={cardToEdit}
         onUpdateCard={updateCards}
+        fetchCards={fetchCards}
       />
     </div>
   );

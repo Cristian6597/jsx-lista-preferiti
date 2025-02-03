@@ -14,13 +14,14 @@ import { Input } from "./ui/input";
 
 const API_URL = "http://localhost:3000/cards";
 
-const Modal = ({ isOpen = false, onOpenChange, onNewCardAdded, cardToEdit, onUpdateCard, updatedCard }) => {
+const Modal = ({ isOpen = false, onOpenChange, onNewCardAdded, cardToEdit, onUpdateCard, fetchCards }) => {
   const [internalOpen, setInternalOpen] = useState(isOpen);
   const open = isOpen || internalOpen;
   const setOpen = onOpenChange || setInternalOpen;
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+
   // Precompila il modal con i dati della card da modificare
   useEffect(() => {
     if (cardToEdit) {
@@ -52,7 +53,11 @@ const Modal = ({ isOpen = false, onOpenChange, onNewCardAdded, cardToEdit, onUpd
         setOpen(false);
         if (onNewCardAdded) {
           onNewCardAdded(newCard);
-          onUpdateCard(updatedCard);
+        }
+
+        // Chiama fetchCards per ricaricare la lista delle card
+        if (fetchCards) {
+          fetchCards();
         }
       } else {
         console.error("Errore nel salvataggio");
@@ -77,7 +82,7 @@ const Modal = ({ isOpen = false, onOpenChange, onNewCardAdded, cardToEdit, onUpd
               <CardHeader>
                 <CardTitle>Aggiungi un nuovo sito</CardTitle>
                 <CardDescription>
-                  Organizza i tuoi preferiti come meglio desideri!.
+                  Organizza i tuoi preferiti come meglio desideri!..
                 </CardDescription>
               </CardHeader>
               <CardContent>
