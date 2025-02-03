@@ -11,11 +11,10 @@ function App() {
   const [cardToEdit, setCardToEdit] = useState(null);
 
   const handleNewCard = (newCard) => {
-    setCards((prevCards) => [...prevCards, newCard]); // Aggiunge la nuova card alla lista
+    setCards((prevCards) => [...prevCards, newCard]);
   };
 
   const handleOpenModal = () => {
-    setCardToEdit(null);  // Assicura che la card da modificare sia nulla quando apri il modal per una nuova card
     setModalOpen(true);
   };
 
@@ -27,14 +26,14 @@ function App() {
   };
 
   useEffect(() => {
-    fetchCards(); // Carica le card all'avvio
+    fetchCards(); 
   }, []);
 
   const removeCards = (id) => {
     fetch(`http://localhost:3000/cards/${id}`, { method: "DELETE" })
       .then((res) => {
         if (res.ok) {
-          fetchCards(); // Ricarica le card dopo la rimozione
+          fetchCards(); 
         } else {
           console.error("Errore durante la rimozione:", res);
         }
@@ -44,12 +43,12 @@ function App() {
 
   const updateCards = (updatedCard) => {
     setCards((prevCards) =>
-      prevCards.map((card) => (card.id === updatedCard.id ? updatedCard : card)) // Modifica la card esistente
+      prevCards.map((card) => (card.id === updatedCard.id ? updatedCard : card))
     );
   };
 
   const openModal = (card) => {
-    setCardToEdit(card); // Pre-compila il modal con la card da modificare
+    setCardToEdit(card);
     setModalOpen(true);
   };
 
@@ -76,14 +75,12 @@ function App() {
         openModal={openModal}
         updateCards={updateCards}
       />
-
       <Outlet />
       <Modal
         isOpen={modalOpen}
         onOpenChange={setModalOpen}
-        cardToEdit={cardToEdit} // Passa la card da modificare
-        onNewCardAdded={handleNewCard} // Aggiungi la nuova card
-        onUpdateCard={updateCards} // Modifica la card esistente
+        cardToEdit={cardToEdit}
+        onUpdateCard={updateCards}
       />
     </div>
   );
