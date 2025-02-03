@@ -1,0 +1,39 @@
+{
+  "cards": [
+    {
+      "title": "Google",
+      "description": "google fantastico",
+      "id": "4161",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png",
+      "favourite": false
+    },
+    {
+      "title": "Facebook",
+      "description": "Facebook fantastico",
+      "id": "4162",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Facebook_logo_%28square%29.png/800px-Facebook_logo_%28square%29.png",
+      "favourite": false
+    },
+    {
+      "title": "Twitter",
+      "description": "Twitter fantastico",
+      "id": "4163",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/2491px-Logo_of_Twitter.svg.png",
+      "favourite": false
+    },
+    {
+      "title": "Youtube",
+      "description": "youtube fantastico",
+      "id": "4164",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png",
+      "favourite": false
+    },
+    {
+      "id": "2839",
+      "title": "232323",
+      "description": "",
+      "imageUrl": "https://pensieribelli.it/wp-content/plugins/elementor/assets/images/placeholder.png",
+      "favourite": false
+    }
+  ]
+}
