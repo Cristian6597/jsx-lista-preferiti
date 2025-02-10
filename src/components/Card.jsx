@@ -7,7 +7,7 @@ const Card = ({ title, description, imageUrl, removeCards, id, updateCards }) =>
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-stone-50 rounded-lg shadow-md overflow-hidden">
       <Modal
         isOpen={isModalOpen}
         onOpenChange={setIsModalOpen}

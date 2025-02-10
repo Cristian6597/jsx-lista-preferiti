@@ -11,16 +11,26 @@ import { Button } from "./ui/button";
 import { createPortal } from "react-dom";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import { useContext } from "react";
+import { ListContext } from "@/context/ListProvider";
 
 const API_URL = "http://localhost:3000/cards";
 
-const Modal = ({ isOpen = false, onOpenChange, onNewCardAdded, cardToEdit, onUpdateCard, fetchCards }) => {
+const Modal = ({
+  isOpen = false,
+  onOpenChange,
+  onNewCardAdded,
+  cardToEdit,
+  onUpdateCard,
+  fetchCards,
+}) => {
   const [internalOpen, setInternalOpen] = useState(isOpen);
   const open = isOpen || internalOpen;
   const setOpen = onOpenChange || setInternalOpen;
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const { selectedType, changeType } = useContext(ListContext);
 
   // Precompila il modal con i dati della card da modificare
   useEffect(() => {
@@ -32,7 +42,9 @@ const Modal = ({ isOpen = false, onOpenChange, onNewCardAdded, cardToEdit, onUpd
   }, [cardToEdit]);
 
   const handleSave = async () => {
-    const finalImageUrl = imageUrl.trim() ? imageUrl : "https://pensieribelli.it/wp-content/plugins/elementor/assets/images/placeholder.png";
+    const finalImageUrl = imageUrl.trim()
+      ? imageUrl
+      : "https://pensieribelli.it/wp-content/plugins/elementor/assets/images/placeholder.png";
     const newCard = {
       title: name,
       description: description,
@@ -98,18 +110,6 @@ const Modal = ({ isOpen = false, onOpenChange, onNewCardAdded, cardToEdit, onUpd
                       />
                     </div>
                     <div className="flex flex-col space-y-1.5">
-                      <Label htmlFor="preferito">Preferito</Label>
-                      <div className="relative">
-                        <textarea
-                          id="preferito"
-                          className="h-32 pt-2 pl-2 w-full border rounded-md resize-none"
-                          placeholder="Inserisci testo"
-                          value={description}
-                          onChange={(e) => setDescription(e.target.value)}
-                        ></textarea>
-                      </div>
-                    </div>
-                    <div className="flex flex-col space-y-1.5">
                       <Label htmlFor="imageUrl">Immagine URL</Label>
                       <Input
                         id="imageUrl"
@@ -120,6 +120,32 @@ const Modal = ({ isOpen = false, onOpenChange, onNewCardAdded, cardToEdit, onUpd
                         onChange={(e) => setImageUrl(e.target.value)}
                       />
                     </div>
+                    <div className="flex flex-col space-y-1.5">
+                      <Label htmlFor="preferito">Descrizione</Label>
+                      <div className="relative">
+                        <textarea
+                          id="preferito"
+                          className="h-32 pt-2 pl-2 w-full border rounded-md resize-none"
+                          placeholder="Inserisci testo"
+                          value={description}
+                          onChange={(e) => setDescription(e.target.value)}
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div className="cartella-destinazione font-bold">
+                      <h1>Cartella: {selectedType} </h1>
+                    </div>
+                    <div className="cartelle flex flex-row gap-2 justify-evenly">
+                      <div onClick={() => changeType('Hobby')} className="rossa border-4 border-yellow-400 border-dashed bg-yellow-300 p-2 rounded-lg w-full h-auto text-center cursor-pointer">
+                        <p>Hobby</p>
+                    </div>
+                        <div onClick={() => changeType('Lavoro')} className="rossa border-4 border-red-400 border-dashed bg-red-300 p-2 rounded-lg w-full h-auto text-center cursor-pointer">
+                        <p>Lavoro</p>
+                        </div>
+                        <div onClick={() => changeType('Utile')} className="blu border-4 border-blue-400 border-dashed bg-blue-300 p-2 rounded-lg w-full h-auto  text-center cursor-pointer">
+                        <p>Utile</p>
+                        </div>
+                      </div>
                   </div>
                 </form>
               </CardContent>

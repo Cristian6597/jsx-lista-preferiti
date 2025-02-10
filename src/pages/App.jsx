@@ -4,6 +4,7 @@ import { Link, Outlet } from "react-router";
 import { Button } from "@/components/ui/button";
 import Modal from "../components/Modal";
 import { Plus } from "lucide-react";
+import { ListProvider } from "@/context/ListProvider";
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -26,14 +27,14 @@ function App() {
   };
 
   useEffect(() => {
-    fetchCards(); 
+    fetchCards();
   }, []);
 
   const removeCards = (id) => {
     fetch(`http://localhost:3000/cards/${id}`, { method: "DELETE" })
       .then((res) => {
         if (res.ok) {
-          fetchCards(); 
+          fetchCards();
         } else {
           console.error("Errore durante la rimozione:", res);
         }
@@ -53,16 +54,18 @@ function App() {
   };
 
   return (
-    <div className="container mx-auto flex flex-col items-center">
-      <div className="w-full flex justify-between items-center my-8">
-        <div className="flex-1 flex justify-center">
-          <Link to={`/`}>
-            <Button className="text-3xl bg-white text-black hover:bg-white font-bold">
-              Le Mie Card
-            </Button>
-          </Link>
-        </div>
-        <div className="flex-1 flex justify-end">
+    <>
+    <ListProvider>
+    <div className="container-main mx-auto flex flex-col items-center bg-emerald-50 h-full">
+      <div className="container-top mx-auto w-full flex flex-col items-center">
+          <div className="flex-1 flex w-full bg-emerald-50 border-4 border-emerald-50 border-dashedp-2 rounded-b-lg justify-center">
+            <Link to={`/`}>
+              <h1 className="text-3xl flex justify-center pt-2 text-black font-bold h-14 w-64">
+                Preferiti
+              </h1>
+            </Link>
+          </div>
+        <div className="w-full flex mt-4 justify-end mr-10">
           <Button className="text-xl font-bold" onClick={handleOpenModal}>
             <Plus /> Nuovo preferito
           </Button>
@@ -84,6 +87,8 @@ function App() {
         fetchCards={fetchCards}
       />
     </div>
+    </ListProvider>
+    </>
   );
 }
 
