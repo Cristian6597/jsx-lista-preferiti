@@ -6,6 +6,8 @@ import Modal from "../components/Modal";
 import { Plus } from "lucide-react";
 import { ListProvider } from "@/context/ListProvider";
 
+const API_URL = "http://localhost:3000/cards";
+
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [cards, setCards] = useState([]);
@@ -20,7 +22,7 @@ function App() {
   };
 
   const fetchCards = () => {
-    fetch("http://localhost:3000/cards")
+    fetch(API_URL)
       .then((res) => res.json())
       .then((cards) => setCards(cards))
       .catch((error) => console.error("Error fetching cards:", error));
@@ -31,7 +33,7 @@ function App() {
   }, []);
 
   const removeCards = (id) => {
-    fetch(`http://localhost:3000/cards/${id}`, { method: "DELETE" })
+    fetch(`${API_URL}/${id}`, { method: "DELETE" })
       .then((res) => {
         if (res.ok) {
           fetchCards();

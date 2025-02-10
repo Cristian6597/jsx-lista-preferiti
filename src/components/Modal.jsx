@@ -28,6 +28,7 @@ const Modal = ({
   const open = isOpen || internalOpen;
   const setOpen = onOpenChange || setInternalOpen;
   const [name, setName] = useState("");
+  const [area, setArea] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const { selectedType, changeType } = useContext(ListContext);
@@ -38,6 +39,7 @@ const Modal = ({
       setName(cardToEdit.title);
       setDescription(cardToEdit.description);
       setImageUrl(cardToEdit.imageUrl);
+      setArea(cardToEdit.area);
     }
   }, [cardToEdit]);
 
@@ -49,7 +51,7 @@ const Modal = ({
       title: name,
       description: description,
       imageUrl: finalImageUrl,
-      favourite: false,
+      area: selectedType,
     };
 
     try {
@@ -133,7 +135,7 @@ const Modal = ({
                       </div>
                     </div>
                     <div className="cartella-destinazione font-bold">
-                      <h1>Cartella: {selectedType} </h1>
+                      <h1 onChange={(e) => setArea(e.target.value)}>Cartella: {selectedType} </h1>
                     </div>
                     <div className="cartelle flex flex-row gap-2 justify-evenly">
                       <div onClick={() => changeType('Hobby')} className="rossa border-4 border-yellow-400 border-dashed bg-yellow-300 p-2 rounded-lg w-full h-auto text-center cursor-pointer">

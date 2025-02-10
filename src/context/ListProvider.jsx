@@ -9,7 +9,7 @@ export const ListContext = createContext();
 export const ListProvider = ({ children }) => {
   
   // Stato per il tipo ( destinazione cartella )
-  const [selectedType, setSelectedType] = useState('lavoro');
+  const [selectedType, setSelectedType] = useState('Lavoro');
   const changeType = (type) => {
     setSelectedType(type);
   };
