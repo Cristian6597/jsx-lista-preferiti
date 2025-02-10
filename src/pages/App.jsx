@@ -56,9 +56,9 @@ function App() {
   return (
     <>
     <ListProvider>
-    <div className="container-main mx-auto flex flex-col items-center bg-emerald-50 h-full">
+    <div className="container-main mx-auto flex flex-col items-center bg-gradient-to-b from-emerald-100 h-full">
       <div className="container-top mx-auto w-full flex flex-col items-center">
-          <div className="flex-1 flex w-full bg-emerald-50 border-4 border-emerald-50 border-dashedp-2 rounded-b-lg justify-center">
+          <div className="flex-1 flex w-full bg-emerald-100 border-4 border-emerald-100 border-dashedp-2 rounded-b-lg justify-center">
             <Link to={`/`}>
               <h1 className="text-3xl flex justify-center pt-2 text-black font-bold h-14 w-64">
                 Preferiti
